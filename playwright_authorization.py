@@ -22,4 +22,3 @@ with sync_playwright() as p:
 
     graph_title = new_page.get_by_test_id("dashboard-toolbar-title-text")
     expect(graph_title).to_have_text(expected="Dashboard")
-    assert 2==1
