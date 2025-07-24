@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import time
 
 import pytest
@@ -16,8 +14,6 @@ def test_wrong_email_or_password_authorization(email: str, password: str):  # С
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True)
         page = browser.new_page()
-
-        page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
 
         page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
 
