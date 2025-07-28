@@ -15,7 +15,6 @@ class RegistrationPage(BasePage):
     def fill_registration_form(self, email:str, login:str, password:str):
 
         self.email_input.fill(value=email)
-        self.page.screenshot(path='./new.png')
         expect(self.email_input).to_have_value(email)
 
         self.login_input.fill(value=login)
