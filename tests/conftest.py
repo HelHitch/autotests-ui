@@ -1,8 +1,12 @@
+
 import json
 
 import pytest
 from playwright.sync_api import Page, Playwright
 from pytest_playwright.pytest_playwright import playwright
+
+
+pytest_plugins = ("fixtures.pages",)
 
 
 
