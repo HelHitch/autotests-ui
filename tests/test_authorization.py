@@ -3,7 +3,8 @@ import time
 import pytest
 from playwright.sync_api import expect, sync_playwright
 
-
+@pytest.mark.login
+@pytest.mark.regression
 @pytest.mark.parametrize('email, password', [("user.name@gmail.com", "password"),
                                                ("user.name@gmail.com", "  "),
                                                ("  ", "password")],

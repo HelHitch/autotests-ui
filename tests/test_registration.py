@@ -1,6 +1,8 @@
+import pytest
 
 
-
+@pytest.mark.regression
+@pytest.mark.registration
 def test_successful_registration(registration_page,
                                  dashboard_page):
     registration_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration")
