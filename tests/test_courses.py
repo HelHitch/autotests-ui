@@ -1,21 +1,16 @@
 import os
-from operator import index
-
 import pytest
-from playwright.sync_api import expect, Page
 
 
 @pytest.mark.courses
 @pytest.mark.regression
-def test_empty_courses_list(chromium_page_with_state: Page):
-    page = chromium_page_with_state
-    page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
-
-    courses_title = page.get_by_test_id("courses-list-toolbar-title-text")
-    expect(courses_title).to_have_text(expected="Courses")
-
-    no_result_text = page.get_by_test_id("courses-list-empty-view-title-text")
-    expect(no_result_text).to_have_text(expected="There is no results")
+def test_empty_courses_list(courses_list_page):
+    courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
+    courses_list_page.navbar.check_visible('username')
+    courses_list_page.sidebar.check_visible()
+    courses_list_page.check_visible_courses_title()
+    courses_list_page.check_visible_create_course_button()
+    courses_list_page.check_visible_empty_view()
 
 @pytest.mark.courses
 @pytest.mark.regression
@@ -45,18 +40,13 @@ def test_create_course(courses_list_page, create_course_page):
     create_course_page.upload_preview_image(file=file_path)
 
     create_course_page.check_visible_image_upload_view(is_image_uploaded=True)
-    course_data = {'title':"Playwright",
-                  'estimated_time':"2 weeks",
-                  'description':"Playwright",
-                  'max_score':"100",
-                  'min_score':"10"}
 
     create_course_page.fill_create_course_form(
-        title=course_data['title'],
-        estimated_time=course_data['estimated_time'],
-        description=course_data['description'],
-        max_score=course_data['max_score'],
-        min_score=course_data['min_score']
+        title="Playwright",
+        estimated_time="2 weeks",
+        description="Playwright",
+        max_score="100",
+        min_score="10"
     )
     create_course_page.click_create_course_button()
 
@@ -65,10 +55,10 @@ def test_create_course(courses_list_page, create_course_page):
     courses_list_page.check_visible_create_course_button()
     courses_list_page.check_visible_course_card(
         index=0,
-        title=course_data['title'],
-        estimated_time=course_data['estimated_time'],
-        max_score=course_data['max_score'],
-        min_score=course_data['min_score']
+        title="Playwright",
+        estimated_time="2 weeks",
+        max_score="100",
+        min_score="10"
     )
 
 
