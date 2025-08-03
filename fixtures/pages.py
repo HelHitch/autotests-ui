@@ -9,19 +9,19 @@ from pages.registration_page import RegistrationPage
 
 
 @pytest.fixture
-def login_page(page: Page):
+def login_page(page: Page) -> LoginPage:
     return LoginPage(page=page)
 
 @pytest.fixture
-def registration_page(page: Page):
+def registration_page(page: Page) -> RegistrationPage:
     return RegistrationPage(page=page)
 
 @pytest.fixture
-def dashboard_page(page: Page):
+def dashboard_page(page: Page) -> DashboardPage:
     return DashboardPage(page=page)
 
 @pytest.fixture
-def dashboard_page_with_state(chromium_page_with_state: Page):
+def dashboard_page_with_state(chromium_page_with_state: Page) -> DashboardPage:
     return DashboardPage(page=chromium_page_with_state)
 
 @pytest.fixture
