@@ -1,5 +1,4 @@
-from playwright.async_api import expect
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from components.base_component import BaseComponent
 
@@ -14,7 +13,9 @@ class LoginFormComponent(BaseComponent):
         self.email_input.fill(value=email)
         self.password_input.fill(value=password)
 
-    def check_visible(self):
+    def check_visible(self, email:str='', password:str=''):
         expect(self.email_input).to_be_visible()
+        expect(self.email_input).to_have_value(value=email)
         expect(self.password_input).to_be_visible()
+        expect(self.password_input).to_have_value(value=password)
 

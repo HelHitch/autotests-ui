@@ -14,5 +14,8 @@ def test_successful_registration(registration_page: RegistrationPage,
     registration_page.registration_form.fill(email="user.name@gmail.com",
                                              login="username",
                                              password="password")
+    registration_page.registration_form.check_visible(email="user.name@gmail.com",
+                                                     login="username",
+                                                     password="password")
     registration_page.click_registration_button()
     dashboard_page.toolbar.check_visible()

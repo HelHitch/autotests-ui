@@ -7,7 +7,7 @@ from pages.base_page import BasePage
 class LoginPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
-        self.login_component = LoginFormComponent(page=page)
+        self.login_form = LoginFormComponent(page=page)
         self.login_btn = page.get_by_test_id('login-page-login-button')
         self.registration_link = page.get_by_test_id('login-page-registration-link')
         self.wrong_email_or_password_alert = page.get_by_test_id('login-page-wrong-email-or-password-alert')
