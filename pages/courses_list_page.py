@@ -17,12 +17,6 @@ class CoursesListPage(BasePage):
         self.course_view = CourseViewComponent(page)
         self.empty_view = EmptyViewComponent(page, 'courses-list')
 
-        self.course_title = page.get_by_test_id('course-widget-title-text')
-        self.course_image = page.get_by_test_id('course-preview-image')
-        self.course_max_score_text = page.get_by_test_id('course-max-score-info-row-view-text')
-        self.course_min_score_text = page.get_by_test_id('course-min-score-info-row-view-text')
-        self.course_estimated_time_text = page.get_by_test_id('course-estimated-time-info-row-view-text')
-
 
     def check_visible_empty_view(self):
         self.empty_view.check_visible(title='There is no results',
