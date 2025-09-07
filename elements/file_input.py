@@ -6,6 +6,6 @@ class FileInput(BaseElement):
     Инпут для загрузки файла
     """
 
-    def set_input_files(self, file:str,  **kwargs):
-            locator=self.get_locator(**kwargs)
+    def set_input_files(self, file:str, nth:int = 0, **kwargs):
+            locator=self.get_locator(nth=nth, **kwargs)
             locator.set_input_files(files=file)

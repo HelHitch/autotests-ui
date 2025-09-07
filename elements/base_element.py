@@ -16,18 +16,18 @@ class BaseElement:
 
     # билдер локатров
     # позволяет динамически сформировать локаторы
-    def get_locator(self, **kwargs) -> Locator:
+    def get_locator(self, nth:int = 0, **kwargs) -> Locator:
         locator = self.locator.format(**kwargs)
-        return self.page.get_by_test_id(locator)
+        return self.page.get_by_test_id(locator).nth(nth)
 
-    def click(self,**kwargs):
-        locator = self.get_locator(**kwargs)
+    def click(self, nth:int = 0, **kwargs):
+        locator = self.get_locator(**kwargs).nth(nth)
         locator.click()
 
-    def check_visible(self, **kwargs):
-        locator = self.get_locator(**kwargs)
+    def check_visible(self, nth:int = 0, **kwargs):
+        locator = self.get_locator(**kwargs).nth(nth)
         expect(locator).to_be_visible()
 
-    def check_text(self, expected_text:str, **kwargs):
-        locator = self.get_locator(**kwargs)
+    def check_text(self, expected_text:str, nth:int = 0,**kwargs):
+        locator = self.get_locator(**kwargs).nth(nth)
         expect(locator).to_have_text(expected=expected_text)
