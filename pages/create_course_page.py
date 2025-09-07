@@ -27,7 +27,4 @@ class CreateCoursePage(BasePage):
                                                 description='Click on "Create exercise" button to create new exercise')
 
     def click_delete_exercise_button(self, index: int):
-        delete_exercise_button = self.page.get_by_test_id(
-            f"create-course-exercise-{index}-box-toolbar-delete-exercise-button"
-        )
-        delete_exercise_button.click()
+        self.create_exercise_form.delete_exercise_button.click(index=index)

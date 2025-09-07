@@ -1,4 +1,6 @@
 import os
+from operator import index
+
 import pytest
 
 from pages.courses_list_page import CoursesListPage
@@ -57,5 +59,6 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         max_score="100",
         min_score="10"
     )
+
 
 
