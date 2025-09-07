@@ -3,7 +3,7 @@ import json
 import pytest
 from playwright.sync_api import Page, Playwright
 
-from pages.registration_page import RegistrationPage
+from pages.authentication.registration_page import RegistrationPage
 
 
 @pytest.fixture
