@@ -1,14 +1,25 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 from components.base_component import BaseComponent
+from elements.input import Input
 
 
 class RegistrationFormComponent(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
-        self.email_input = page.get_by_test_id("registration-form-email-input").locator("//input")
-        self.login_input = page.get_by_test_id("registration-form-username-input").locator("//input")
-        self.password_input = page.get_by_test_id("registration-form-password-input").locator("//input")
+        self.email_input = Input(
+            page=page,
+            locator="registration-form-email-input",
+            name="Registration Email input"
+        )
+        self.login_input = Input(
+            page=page,
+            locator="registration-form-username-input",
+            name="Registration Login Input"
+        )
+        self.password_input =  Input(page=page,
+                                     locator="registration-form-password-input",
+                                     name="Registration Password Input")
 
     def fill(self, email:str, login:str, password:str):
         self.email_input.fill(value=email)
@@ -16,10 +27,13 @@ class RegistrationFormComponent(BaseComponent):
         self.password_input.fill(value=password)
 
     def check_visible(self, email:str='', login:str='', password:str=''):
-        expect(self.email_input).to_be_visible()
-        expect(self.email_input).to_have_value(value=email)
-        expect(self.login_input).to_be_visible()
-        expect(self.login_input).to_have_value(value=login)
-        expect(self.password_input).to_be_visible()
-        expect(self.password_input).to_have_value(value=password)
+        self.email_input.check_visible()
+        self.email_input.check_have_value(value=email)
+
+        self.login_input.check_visible()
+        self.login_input.check_have_value(value=login)
+
+        self.password_input.check_visible()
+        self.password_input.check_have_value(value=password)
+
 
