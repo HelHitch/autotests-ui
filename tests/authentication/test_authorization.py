@@ -1,12 +1,22 @@
+import allure
 import pytest
+from allure_commons.types import Severity
 
 from pages.authentication.login_page import LoginPage
 from pages.authentication.registration_page import RegistrationPage
 from pages.dashboard.dashboard_page import DashboardPage
+from tools.allure.epics import AllureEpic
+from tools.allure.features import AllureFeature
+from tools.allure.stories import AllureStory
 
 
+@allure.epic(AllureEpic.LMS)
+@allure.feature(AllureFeature.AUTHENTICATION)
+@allure.story(AllureStory.AUTHORIZATION)
 @pytest.mark.regression
 class TestAuthorization:
+    @allure.severity(Severity.CRITICAL)
+    @allure.title("User login with wrong email or password")
     @pytest.mark.login
     @pytest.mark.parametrize("email, password", [("user.name@gmail.com", "password"),
                                                    ("user.name@gmail.com", "  "),
@@ -15,7 +25,6 @@ class TestAuthorization:
                                   "Проверяем, что пользователь не может войти в систему с невалидным email, и пустым password",
                                   "Проверяем, что пользователь не может войти в систему с пустым email, и невалидным password"])
     def test_wrong_email_or_password_authorization(self, email: str, password: str, login_page: LoginPage):  # Создаем тестовую функцию
-
         login_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
 
         login_page.login_form.check_visible()
@@ -24,6 +33,8 @@ class TestAuthorization:
         login_page.click_login_button()
         login_page.check_visible_wrong_email_or_password_alert()
 
+    @allure.severity(Severity.BLOCKER)
+    @allure.title("User login with correct login and password")
     def test_successful_authorization(self,
                                       registration_page:RegistrationPage,
                                       login_page: LoginPage,
@@ -49,7 +60,8 @@ class TestAuthorization:
         dashboard_page.sidebar.check_visible()
         dashboard_page.sidebar.click_logout()
 
-
+    @allure.severity(Severity.NORMAL)
+    @allure.title("Navigation from login page to registration page")
     def test_navigate_from_authorization_to_registration(self,
                                           registration_page:RegistrationPage,
                                           login_page: LoginPage):

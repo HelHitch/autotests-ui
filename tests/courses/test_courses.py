@@ -1,13 +1,22 @@
 import os
+
+import allure
 import pytest
 from pages.courses.courses_list_page import CoursesListPage
 from pages.courses.create_course_page import CreateCoursePage
+from tools.allure.epics import AllureEpic
+from tools.allure.features import AllureFeature
+from tools.allure.stories import AllureStory
+from allure_commons.types import Severity
 
-
+@allure.epic(AllureEpic.LMS)
+@allure.feature(AllureFeature.COURSES)
+@allure.story(AllureStory.COURSES)
 @pytest.mark.courses
 @pytest.mark.regression
 class TestCourses:
-
+    @allure.severity(Severity.NORMAL)
+    @allure.title("Check displaying of empty courses list")
     def test_empty_courses_list(self, courses_list_page: CoursesListPage):
         courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
         courses_list_page.navbar.check_visible('username')
@@ -15,7 +24,8 @@ class TestCourses:
         courses_list_page.toolbar.check_visible()
         courses_list_page.check_visible_empty_view()
 
-
+    @allure.severity(Severity.CRITICAL)
+    @allure.title("Create course")
     def test_create_course(self, courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
         create_course_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create")
 
@@ -34,7 +44,7 @@ class TestCourses:
         create_course_page.create_exercise_toolbar.check_visible()
         create_course_page.check_visible_exercises_empty_view()
 
-        file_path = os.path.join('..', 'testdata', 'files', 'image.jpeg')
+        file_path = os.path.join('.', 'testdata', 'files', 'image.jpeg')
         create_course_page.image_upload_widget.upload_preview_image(file=file_path)
 
         create_course_page.image_upload_widget.check_visible(is_image_uploaded=True)
@@ -58,6 +68,8 @@ class TestCourses:
             min_score="10"
         )
 
+    @allure.severity(Severity.BLOCKER)
+    @allure.title("Edit course")
     def test_edit_course(self,
                          courses_list_page: CoursesListPage,
                          create_course_page: CreateCoursePage):
