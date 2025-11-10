@@ -13,6 +13,9 @@ from tools.allure.stories import AllureStory
 @allure.epic(AllureEpic.LMS)
 @allure.feature(AllureFeature.AUTHENTICATION)
 @allure.story(AllureStory.AUTHORIZATION)
+@allure.parent_suite(AllureEpic.LMS)
+@allure.suite(AllureFeature.AUTHENTICATION)
+@allure.sub_suite(AllureStory.AUTHORIZATION)
 @pytest.mark.regression
 class TestAuthorization:
     @allure.severity(Severity.CRITICAL)

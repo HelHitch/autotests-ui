@@ -13,6 +13,9 @@ from tools.allure.stories import AllureStory
 @allure.epic(AllureEpic.LMS)
 @allure.feature(AllureFeature.AUTHENTICATION)
 @allure.story(AllureStory.REGISTRATION)
+@allure.parent_suite(AllureEpic.LMS)
+@allure.suite(AllureFeature.AUTHENTICATION)
+@allure.sub_suite(AllureStory.REGISTRATION)
 @pytest.mark.registration
 @pytest.mark.regression
 class TestRegistration:
