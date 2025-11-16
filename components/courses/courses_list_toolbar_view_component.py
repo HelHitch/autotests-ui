@@ -1,5 +1,6 @@
 import re
 
+import allure
 from playwright.sync_api import Page, expect
 
 from components.base_component import BaseComponent
@@ -18,12 +19,14 @@ class CoursesListToolbarViewComponent(BaseComponent):
                                            locator='courses-list-toolbar-create-course-button',
                                            name="Create Course Button")
 
+    @allure.step("Check courses list tool bar is visible")
     def check_visible(self):
         self.title.check_visible()
         self.title.check_text(expected_text='Courses')
 
         self.create_course_button.check_visible()
 
+    @allure.step("Go to course creation page")
     def click_create_course_button(self):
         self.create_course_button.click()
         # Дополнительно проверим, что произошел редирект на правильную страницу
